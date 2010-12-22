@@ -9,7 +9,7 @@ module ActionView
         if @@cache_asset_timestamps && (asset_id = @@asset_timestamps_cache[source])
           asset_id
         else
-          path = File.join(ASSETS_DIR, source)
+          path = File.join(config.assets_dir, source)
           rewrite_path = File.exist?(path) && !CloudfrontAssetHost.disable_cdn_for_source?(source)
           asset_id = rewrite_path ? CloudfrontAssetHost.key_for_path(path) : ''
 
