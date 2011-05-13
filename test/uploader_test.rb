@@ -10,7 +10,7 @@ class UploaderTest < Test::Unit::TestCase
         config.cname  = "assethost.com"
         config.bucket = "bucketname"
         config.key_prefix = ""
-        config.s3_config = "#{RAILS_ROOT}/config/s3.yml"
+        config.s3_config = "#{Rails.root}/config/s3.yml"
         config.enabled = false
       end
     end
@@ -25,7 +25,7 @@ class UploaderTest < Test::Unit::TestCase
       CloudfrontAssetHost.configure do |config|
         config.enabled = false
         config.bucket = "bucketname"
-        config.s3_config = "#{RAILS_ROOT}/config/s3-env.yml"
+        config.s3_config = "#{Rails.root}/config/s3-env.yml"
       end
       config = CloudfrontAssetHost::Uploader.config
       assert_equal 'access_key', config['access_key_id']
@@ -116,7 +116,7 @@ class UploaderTest < Test::Unit::TestCase
     end
 
     should "correctly gzip files" do
-      path = File.join(RAILS_ROOT, 'public', 'javascripts', 'application.js')
+      path = File.join(Rails.root, 'public', 'javascripts', 'application.js')
       contents = File.read(path)
 
       gz_path = CloudfrontAssetHost::Uploader.gzipped_path(path)
@@ -126,7 +126,7 @@ class UploaderTest < Test::Unit::TestCase
     end
 
     should "correctly rewrite css files" do
-      path = File.join(RAILS_ROOT, 'public', 'stylesheets', 'style.css')
+      path = File.join(Rails.root, 'public', 'stylesheets', 'style.css')
       css_path = CloudfrontAssetHost::Uploader.rewritten_css_path(path)
 
       File.read(css_path).split("\n").each do |line|
@@ -144,7 +144,7 @@ class UploaderTest < Test::Unit::TestCase
         config.cname  = "assethost.com"
         config.bucket = "bucketname"
         config.key_prefix = ""
-        config.s3_config = "#{RAILS_ROOT}/config/s3.yml"
+        config.s3_config = "#{Rails.root}/config/s3.yml"
         config.enabled = false
         config.exclude_pattern = /style/
       end

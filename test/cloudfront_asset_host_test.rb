@@ -23,12 +23,12 @@ class CloudfrontAssetHostTest < Test::Unit::TestCase
     end
 
     should "return key for path" do
-      assert_equal "8ed41cb87", CloudfrontAssetHost.key_for_path(File.join(RAILS_ROOT, 'public', 'javascripts', 'application.js'))
+      assert_equal "8ed41cb87", CloudfrontAssetHost.key_for_path(File.join(Rails.root, 'public', 'javascripts', 'application.js'))
     end
 
     should "prepend prefix to key" do
       CloudfrontAssetHost.key_prefix = "prefix/"
-      assert_equal "prefix/8ed41cb87", CloudfrontAssetHost.key_for_path(File.join(RAILS_ROOT, 'public', 'javascripts', 'application.js'))
+      assert_equal "prefix/8ed41cb87", CloudfrontAssetHost.key_for_path(File.join(Rails.root, 'public', 'javascripts', 'application.js'))
     end
 
     should "default asset_dirs setting" do

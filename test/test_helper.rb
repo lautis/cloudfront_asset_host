@@ -11,16 +11,14 @@ require 'mocha'
 begin require 'redgreen'; rescue LoadError; end
 begin require 'turn'; rescue LoadError; end
 
-RAILS_ROOT = File.expand_path(File.join(File.dirname(__FILE__), 'app'))
-
 module Rails
   class << self
     def root
-      RAILS_ROOT
+      File.expand_path(File.join(File.dirname(__FILE__), 'app'))
     end
 
     def public_path
-      File.join(RAILS_ROOT, 'public')
+      File.join(Rails.root, 'public')
     end
 
     def env
